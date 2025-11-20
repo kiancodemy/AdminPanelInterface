@@ -118,3 +118,55 @@
     @apply bg-background text-foreground;
   }
 }
+/* css customizer */
+body {
+  box-sizing: border-box;
+  font-family: YekanFont,sans-serif;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  background-color:var(--light-gray);
+}
+
+:root{
+  --darkBlue: rgb(100, 116, 139);
+  --light-gray:#f3f4f6;
+}
+
+
+/* fonts */
+@font-face {
+  font-family: "YekanFontBold";
+  src: url("/src/assets/fonts/IRANYekanX-Bold.woff2") format("woff2");
+  font-weight: 400;
+  -moz-font-feature-settings: "ss02";
+  -webkit-font-feature-settings: "ss02";
+  font-feature-settings: "ss02";
+  -moz-font-feature-settings: "ss03";
+  -webkit-font-feature-settings: "ss03";
+  font-feature-settings: "ss03";
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "YekanFont";
+  src: url("/src/assets/fonts/IRANYekanX-Regular.woff2") format("woff2");
+  font-weight: 700;
+  -moz-font-feature-settings: "ss02";
+  -webkit-font-feature-settings: "ss02";
+  font-feature-settings: "ss02";
+  -moz-font-feature-settings: "ss03";
+  -webkit-font-feature-settings: "ss03";
+  font-feature-settings: "ss03";
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* tailwind customize items */
+@theme {
+  --font-yekan: "YekanFont",sans-serif;
+  --font-yekanBold: "YekanFontBold",sans-serif;
+
+}
