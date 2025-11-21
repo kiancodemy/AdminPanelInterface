@@ -1,9 +1,13 @@
 import {FcApproval} from "react-icons/fc";
 import {useForm} from "react-hook-form";
+import {AiOutlineEye} from "react-icons/ai";
+import {AiOutlineEyeInvisible} from "react-icons/ai";
 import type {SubmitHandler} from "react-hook-form";
 import type {LoginRequest} from "@/types/Authnetication.ts";
+import {useState} from "react";
 
 export default function LoginComponent() {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const {
         register,
         handleSubmit,
@@ -32,6 +36,7 @@ export default function LoginComponent() {
                         },
                     })} className={"bg-gray-100 outline-1  focus:outline-blue-500 rounded-md p-2 text-left "}
                            type="text"/>
+
                     <p className={"text-red-500 text-[13px] font-yekan min-h-[1rem]"}>{errors?.email?.message || ""}</p>
 
                 </div>
@@ -39,17 +44,25 @@ export default function LoginComponent() {
                     <label className={" text-[14px] "}>
                         رمز عبور
                     </label>
-                    <input {...register("password", {
-                        required: {
-                            value: true,
-                            message: "وارد کردن رمز عبور الزامی است"
-                        }
-                    })} className={"bg-gray-100 outline-1  focus:outline-blue-500 rounded-md p-2 text-left "}
-                           type="text"/>
+                    <div className={"flex bg-gray-100  flex-col relative"}>
+                        <input  {...register("password", {
+                            required: {
+                                value: true,
+                                message: "وارد کردن رمز عبور الزامی است"
+                            }
+                        })} className={"bg-gray-100 outline-1  focus:outline-blue-500 rounded-md p-2 text-left "}
+                                type={showPassword ? "password" : "text"}/>
+                        <div onClick={()=>setShowPassword((prev)=>!prev)} className={"absolute rounded-md border-none flex items-center justify-center w-10 text-gray-700 text-md bg-gray-300 cursor-pointer top-0 bottom-0 right-0"}>
+                            {showPassword ?
+                                <AiOutlineEyeInvisible/> : <AiOutlineEye/>}
+                        </div>
+
+                    </div>
+
                     <p className={"text-red-500 text-[13px] min-h-[1rem] font-yekan"}>{errors?.password?.message || ""}</p>
                 </div>
                 <div className={"flex flex-row-reverse gap-x-1 my-2  justify-end items-center"}>
-                    <p className="md:text-sm text-[12px]">
+                    <p className="text-[13px]">
                         ورود/ ثبت‌نام شما به معنای پذیرش
                         <span className="text-blue-500 font-yekanBold"> قوانین </span>
                         میباشد.
