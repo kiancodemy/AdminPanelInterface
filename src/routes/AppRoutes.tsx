@@ -1,6 +1,7 @@
 import {Routes, Route} from "react-router-dom";
-import LoginPage from "@/pages/LoginPage.tsx";
+import LoginPage from "@/pages/login/LoginPage.tsx";
 import Home from "@/components/home/Home.tsx"
+import ProductPage from "@/pages/product/ProductPage.tsx";
 //// all App routes
 export default function AppRoutes() {
     return (
@@ -10,7 +11,8 @@ export default function AppRoutes() {
                     <Route path={"category"} element={<h1>category</h1>}/>
                     <Route path={"image"} element={<h1>image</h1>}/>
                     <Route path={"user"} element={<h1>user</h1>}/>
-                    <Route path={"role"} element={<h1>role</h1>}/>
+                    <Route path={"roles"} element={<h1>role</h1>}/>
+                    <Route path={"products"} element={<ProductPage/>}/>
                 </Route>
             </Route>
             <Route path="/login" element={<LoginPage/>}/>

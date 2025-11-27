@@ -3,6 +3,7 @@ import type {headerItemsType} from "@/types/HeaderItemsType.ts";
 import MobileNavbar from "@/components/home/MobileNavbar.tsx";
 import {Link} from "react-router-dom";
 export default function Header() {
+
     return (
         <div className={"max-w-full bg-white items-center container mx-auto flex justify-start md:justify-center"}>
             <div className={"md:flex hidden gap-x-8 px-6"}>

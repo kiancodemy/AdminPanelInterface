@@ -16,10 +16,14 @@ export default function LoginComponent() {
 
     const onSubmit: SubmitHandler<LoginRequest> = (data) => console.log(data);
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className={"flex justify-center items-center w-full h-screen "}>
+        <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col justify-center items-center w-full h-screen "}>
+            <h1 className={"font-yekanBold text-center mb-5 bg-[var(--light-gray)] text-[var(--darkBlue)] py-2 text md:text-4xl"}>
+                پنل مدیریت
+            </h1>
             <div
                 className={"flex  flex-col px-5 md:px-10 py-8 bg-white shadow-lg max-w-9/10 md:max-w-[450px] rounded-md  container mx-auto"}>
                 <div>
+
                     <h1 className={"font-yekanBold text-[var(--darkBlue)] py-2 md:text-2xl"}>
                         ورود/ثبت نام
                     </h1>

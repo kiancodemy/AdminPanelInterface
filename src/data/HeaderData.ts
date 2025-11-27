@@ -1,13 +1,13 @@
 export const headerItems = [
     {
         id: 1,
-        title: "گروه بندی محصولات",
+        title: "گروه بندی ",
         link: "/category"
     },
     {
         id: 2,
-        title: "تصاویر",
-        link: "/image"
+        title: "محصولات",
+        link: "/products"
     },
     {
         id: 3,
