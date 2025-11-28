@@ -1,4 +1,4 @@
-import ProductFilter from "@/components/product/ProductFilter.tsx";
+import {ProductFilter} from "@/components/produc/ProductFilter.tsx";
 export default function ProductPage() {
   return(
       <div>
