@@ -11,19 +11,19 @@ import {Slider} from "@/components/ui/slider";
 import {useState} from "react";
 import type {ProductQuery} from "@/types/productQuery.ts";
 import {useSearchParams} from "react-router-dom";
-
-export function ProductFilter() {
+type filterType={
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export default function ProductFilter({setOpen}:filterType) {
     const [priceRange, setPriceRange] = useState<number[]>([0, 50_000_000]);
     const [stock, setStock] = useState<string>("");
     const [sort, setSort] = useState<string>("");
-    const [categoryId, setCategoryId] = useState<number | null>(null);
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [categoryId,] = useState<number | null>(null);
+    const [, setSearchParams] = useSearchParams();
 
 
     const handleSubmit = () => {
 
-        console.log(searchParams);
-        setCategoryId(1);
         const newFilter: ProductQuery = {
             min: priceRange[0],
             max: priceRange[1],
@@ -40,13 +40,15 @@ export function ProductFilter() {
             }
         }
         setSearchParams(queryParams);
+        setOpen(false)
     };
+
 
 
     return (
         <div className="absolute inset-0 flex justify-start bg-black/50">
             <div className="md:w-[400px] max-w-full container flex overflow-y-scroll flex-col p-6 bg-white">
-                <div className="my-1 md:my-4 text-2xl cursor-pointer">
+                <div onClick={()=>setOpen(false)} className="my-1 md:my-4 text-2xl cursor-pointer">
                     <IoMdClose/>
                 </div>
 
@@ -134,6 +136,7 @@ export function ProductFilter() {
                 </Accordion>
 
                 <button
+
                     onClick={handleSubmit}
                     className="bg-blue-500 hover:bg-blue-700 duration-300 mt-5 cursor-pointer text-white rounded-md py-2 px-6"
                 >

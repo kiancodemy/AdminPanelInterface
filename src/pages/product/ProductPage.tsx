@@ -1,9 +1,10 @@
-import {ProductFilter} from "@/components/produc/ProductFilter.tsx";
-export default function ProductPage() {
-  return(
-      <div>
-          <ProductFilter/>
+import ProductList from "@/components/product/ProductList.tsx";
 
-      </div>
-  )
+export default function ProductPage() {
+
+    return (
+        <div>
+            <ProductList/>
+        </div>
+    )
 }
