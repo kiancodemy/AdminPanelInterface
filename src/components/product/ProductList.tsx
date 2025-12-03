@@ -1,38 +1,66 @@
-import {useState, lazy, Suspense,useEffect} from "react";
+import {useState, lazy, Suspense} from "react";
 import {useLocation} from "react-router-dom";
-import {BsFilterLeft} from "react-icons/bs";
-
+import FilterProductButton from "@/components/product/FilterProductButton.tsx";
+import {keepPreviousData, useQuery} from '@tanstack/react-query'
+import {fetchAllProducts} from "@/api/productApi/ProductService.ts";
 import ProductFilterSkeleton from "@/components/skeletons/ProductFilterSkeleton.tsx";
+import type {dataType} from "@/types/productQuery.ts";
+import PageAndTotalNumber from "@/components/product/PageAndTotalNumber.tsx";
+import ProductItem from "@/components/product/ProductItem.tsx";
+import ProductListSkeleton from "@/components/skeletons/ProductListSkeleton.tsx";
 
+const ProductFilter = lazy(() => import("./ProductFilter.tsx"));
 export default function ProductList() {
-    const ProductFilter = lazy(() => import("./ProductFilter.tsx"));
+
+    ///open and close filter products navbar//
     const [open, setOpen] = useState<boolean>(false);
     const location = useLocation();
+    const query = location.search;
 
-    ////fetching products///
-    useEffect(()=>{
+    /// getAllProducts functions///
+    const {data, isLoading} = useQuery<dataType>({
+        queryKey: ['products', query],
+        queryFn: () => fetchAllProducts(query),
+        placeholderData: keepPreviousData,
+        retry: false,
+        staleTime: 5 * 60 * 1000,
+    });
 
-    },[location.search])
 
     return (
-        <div className={"max-w-full container mx-auto bg-gray-50 p-2  md:p-5"}>
-            {/*filtering button*/}
-            <div onClick={() => setOpen(true)}
-                 className={"flex justify-start cursor-pointer py-2"}>
-                <div className={"flex items-center justify-center gap-x-3 bg-blue-500 hover:bg-blue-700 text-white p-2 rounded-md "}>
-                    <h1 className={"text-sm md:text-base"}>فیلتر و دسته بندی</h1>
-                    <div className={"text-xl md:text-3xl "}><BsFilterLeft/></div>
-                </div>
+        <div className={"max-w-full container flex flex-col gap-y-12 mx-auto bg-gray-50 p-2  md:p-5"}>
+
+
+            {/* filter header */}
+            <div
+                className={"flex px-3 border-b-2 bg-white justify-between gap-x-3 items-center cursor-pointer py-6 rounded-md"}>
+                <FilterProductButton setOpen={setOpen}></FilterProductButton>
+                {data && <PageAndTotalNumber
+                    pageInfo={{
+                        totalElements: data.data.totalElements,
+                        totalPages: data.data.totalPages,
+                        page: data.data.totalElements > 0 ? data.data.page : -1
+                    }}/>}
+
             </div>
+            {/*handle loading */}
+            {isLoading && <ProductListSkeleton/>}
+
+
             {/*product container*/}
-            <div className={"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"}>
+            {data && data.data.content.length > 0 ? (
 
+                <div className={"grid  grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-3"}>
+                    {data?.data.content.map(item =>
+                        <ProductItem key={item.id} item={item}></ProductItem>
+                    )}
 
+                </div>
 
-            </div>
+            ) : <div className={"flex md:py-40 py-20 grow items-center justify-center"}><h1>محصولی موجود نیست</h1>
+            </div>}
 
-
-
+            {/* filter products navbar */}
             {open && <Suspense fallback={<ProductFilterSkeleton/>}>
                 <ProductFilter setOpen={setOpen}/>
             </Suspense>}

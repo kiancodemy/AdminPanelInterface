@@ -8,18 +8,34 @@ import {Label} from "@/components/ui/label";
 import {IoMdClose} from "react-icons/io";
 import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 import {Slider} from "@/components/ui/slider";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import disableScroll from 'disable-scroll';
 import type {ProductQuery} from "@/types/productQuery.ts";
+
 import {useSearchParams} from "react-router-dom";
-type filterType={
+
+type filterType = {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export default function ProductFilter({setOpen}:filterType) {
+
+export default function ProductFilter({setOpen}: filterType) {
     const [priceRange, setPriceRange] = useState<number[]>([0, 50_000_000]);
     const [stock, setStock] = useState<string>("");
     const [sort, setSort] = useState<string>("");
     const [categoryId,] = useState<number | null>(null);
     const [, setSearchParams] = useSearchParams();
+
+
+    /// diable and enable scroll //////
+    useEffect(() => {
+        disableScroll.on();
+        document.body.classList.add("no-scrollbar");// lock main page scroll
+        return () => {
+            disableScroll.off();
+            document.body.classList.remove("no-scrollbar");
+        } // unlock scroll when unmount
+
+    }, []);
 
 
     const handleSubmit = () => {
@@ -40,15 +56,19 @@ export default function ProductFilter({setOpen}:filterType) {
             }
         }
         setSearchParams(queryParams);
-        setOpen(false)
+        setOpen(false);
+
+
     };
 
 
-
     return (
-        <div className="absolute inset-0 flex justify-start bg-black/50">
+        <div className="fixed inset-0 flex justify-start bg-black/50">
             <div className="md:w-[400px] max-w-full container flex overflow-y-scroll flex-col p-6 bg-white">
-                <div onClick={()=>setOpen(false)} className="my-1 md:my-4 text-2xl cursor-pointer">
+                <div onClick={() => {
+                    setOpen(false);
+
+                }} className="my-1 md:my-4 text-2xl cursor-pointer">
                     <IoMdClose/>
                 </div>
 

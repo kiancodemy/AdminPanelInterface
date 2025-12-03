@@ -128,6 +128,9 @@ body {
   background-color:var(--light-gray);
 }
 
+.no-scrollbar {
+  overflow: hidden; /* disables scroll */
+}
 :root{
   --darkBlue: rgb(100, 116, 139);
   --light-gray:#f3f4f6;
