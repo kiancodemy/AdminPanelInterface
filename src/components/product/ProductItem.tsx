@@ -3,7 +3,7 @@ import {Link} from "react-router";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export default function ProductItem({item}: { item: ProductDto }) {
     return (
-        <div className={"flex text-sm md:text-base justify-center items-center flex-col gap-y-4 py-6  px-3 bg-white rounded-md"}>
+        <div className={"flex text-sm md:text-base justify-center items-center flex-col gap-y-4 p-4 bg-white rounded-md"}>
             {item.images.length > 0 ? (
                 <img className={"h-40 md:w-4/5 w-full  rounded-md overflow-hidden md:h-50 object-fill"} src={`${BASE_URL}${item.images[0].downloadedUrl}`}
                      alt={`${item.images[0].id}`}/>
@@ -21,7 +21,7 @@ export default function ProductItem({item}: { item: ProductDto }) {
                 </div>
                 <div>
                     <Link className={` text-white py-2 px-6 rounded-md  cursor-pointer ${item.stock === 0
-                        ? "bg-gray-500 pointer-events-none cursor-pointer"
+                        ? "bg-gray-500 cursor-pointer"
                         : "bg-blue-500 cursor-pointer"}`} to={{pathname:`productDetail/${item.id}`}}>مشاهده جزییات</Link>
 
                 </div>

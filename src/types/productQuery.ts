@@ -37,7 +37,7 @@ export interface ProductPageDto {
     content: ProductDto[];
     totalElements: number;
     totalPages: number;
-    page: number;
+    number: number;
     size: number;
 }
 
@@ -47,8 +47,9 @@ export interface dataType {
     data: ProductPageDto;
 }
 
-export interface PageInfoType{
+export interface PageInfoType {
     totalElements: number;
     page: number;
     totalPages: number;
+    size: number
 }

@@ -10,10 +10,14 @@ import ProductItem from "@/components/product/ProductItem.tsx";
 import ProductListSkeleton from "@/components/skeletons/ProductListSkeleton.tsx";
 
 const ProductFilter = lazy(() => import("./ProductFilter.tsx"));
+import PaginationComponent from "@/components/pagination/PaginationComponent.tsx";
+
 export default function ProductList() {
 
     ///open and close filter products navbar//
     const [open, setOpen] = useState<boolean>(false);
+
+    // get the url query///
     const location = useLocation();
     const query = location.search;
 
@@ -28,18 +32,17 @@ export default function ProductList() {
 
 
     return (
-        <div className={"max-w-full container flex flex-col gap-y-12 mx-auto bg-gray-50 p-2  md:p-5"}>
-
-
+        <div className={"max-w-full overflow-y-scroll container flex flex-col gap-y-4 mx-auto bg-gray-50 p-2  md:p-5"}>
             {/* filter header */}
             <div
-                className={"flex px-3 border-b-2 bg-white justify-between gap-x-3 items-center cursor-pointer py-6 rounded-md"}>
+                className={"flex px-3 border-b-2 bg-white justify-between gap-x-3 items-center cursor-pointer py-3 rounded-md"}>
                 <FilterProductButton setOpen={setOpen}></FilterProductButton>
                 {data && <PageAndTotalNumber
                     pageInfo={{
+                        size:data.data.size,
                         totalElements: data.data.totalElements,
                         totalPages: data.data.totalPages,
-                        page: data.data.totalElements > 0 ? data.data.page : -1
+                        page: data.data.totalElements > 0 ? data.data.number : -1
                     }}/>}
 
             </div>
@@ -64,6 +67,12 @@ export default function ProductList() {
             {open && <Suspense fallback={<ProductFilterSkeleton/>}>
                 <ProductFilter setOpen={setOpen}/>
             </Suspense>}
+            {data && data.data.content.length > 0 && <PaginationComponent PageInfo={{
+                totalElements: data.data.totalElements,
+                page: data.data.number,
+                totalPages: data.data.totalPages,
+                size: data.data.size
+            }}/>}
 
         </div>
     )
