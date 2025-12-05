@@ -30,7 +30,6 @@ export default function ProductList() {
         staleTime: 5 * 60 * 1000,
     });
 
-
     return (
         <div className={"max-w-full overflow-y-scroll container flex flex-col gap-y-4 mx-auto bg-gray-50 p-2  md:p-5"}>
             {/* filter header */}
@@ -53,7 +52,7 @@ export default function ProductList() {
             {/*product container*/}
             {data && data.data.content.length > 0 ? (
 
-                <div className={"grid  grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-3"}>
+                <div className={"grid grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-3"}>
                     {data?.data.content.map(item =>
                         <ProductItem key={item.id} item={item}></ProductItem>
                     )}
@@ -67,6 +66,8 @@ export default function ProductList() {
             {open && <Suspense fallback={<ProductFilterSkeleton/>}>
                 <ProductFilter setOpen={setOpen}/>
             </Suspense>}
+
+            {/* pagination button */}
             {data && data.data.content.length > 0 && <PaginationComponent PageInfo={{
                 totalElements: data.data.totalElements,
                 page: data.data.number,

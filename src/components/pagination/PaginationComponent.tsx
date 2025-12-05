@@ -11,8 +11,6 @@ export default function PaginationComponent({PageInfo}: { PageInfo: PageInfoType
         setSearchParams(prev => ({...prev,"page":even.selected}));
 
     };
-    console.log(PageInfo);
-
     return (
         <>
             <ReactPaginate

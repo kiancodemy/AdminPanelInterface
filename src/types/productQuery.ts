@@ -26,6 +26,7 @@ export interface CategoryDto {
 export interface ProductDto {
     id: number;
     price: number;
+    isActive:boolean;
     name: string;
     images: ImageDto[];
     stock: number;
