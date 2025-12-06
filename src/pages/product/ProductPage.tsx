@@ -1,4 +1,4 @@
-import ProductList from "@/components/product/ProductList.tsx";
+import ProductList from "@/components/product/productContainer/ProductList.tsx";
 
 export default function ProductPage() {
 
