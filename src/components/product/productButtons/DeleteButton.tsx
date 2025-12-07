@@ -1,4 +1,4 @@
-import {Button} from "@/components/ui/button"
+import {Button} from "@/components/ui/button.tsx"
 import {
     Dialog,
     DialogClose,
@@ -7,32 +7,34 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog.tsx"
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {deactivateByIdFn} from "@/api/productApi/ProductMutation.ts";
+import {deleteByIdFn} from "@/api/productApi/ProductMutation.ts";
 import type {ProductDto, dataType} from "@/types/productQuery.ts";
 import {toastHandler} from "@/service/ToastHandler.ts";
+
 import {useLocation} from "react-router-dom";
-export default function DeactivateDialog({id}: { id: number }) {
+export default function DeleteButton({id}: { id: number }) {
     const queryClient = useQueryClient();
     const location=useLocation();
     const mutation = useMutation({
 
-        mutationFn: (id: number) => deactivateByIdFn(id),
+        mutationFn: (id: number) => deleteByIdFn(id),
         onError: (error: Error) => {
             toastHandler({message: error.message, isSuccess: false});
-        },
-        onSuccess: (updatedItem) => {
 
-            toastHandler({message: updatedItem.message, isSuccess: true});
+        },
+        onSuccess: (data,variables:number) => {
+            toastHandler({message: data.message, isSuccess: true});
+
 
             // update the cached query that matches the current query string
             queryClient.setQueryData(['products', location.search], (oldData: dataType) => {
                 if (!oldData) return oldData;
-                console.log(updatedItem);
 
-                const updatedContent = oldData.data.content.map((item: ProductDto) =>
-                    item.id === updatedItem.data.id ? updatedItem.data : item
+
+                const updatedContent = oldData.data.content.filter((item: ProductDto) =>
+                    item.id !== variables
                 );
 
                 return {
@@ -46,23 +48,21 @@ export default function DeactivateDialog({id}: { id: number }) {
         },
     });
 
-
-
     /// delete button////
-    const handleDeactive = () => {
-       mutation.mutate(id);
-    };
+    const handleDelete = () => {
+        mutation.mutate(id);
+    }
     return (
         <Dialog>
 
                 <DialogTrigger
-                    className={"rounded-md py-2 px-8  bg-blue-500 text-white cursor-pointer hover:bg-blue-600 duration-300 hover:text-white"}
+                    className={"py-2 px-8 rounded-md  bg-red-500 text-white cursor-pointer hover:bg-red-600 duration-300 hover:text-white"}
                     asChild>
-                    <Button  variant="outline">غیر فعال کردن</Button>
+                    <Button variant="outline">پاک کردن</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px] ">
                     <DialogHeader>
-                        <DialogTitle className={"text-right text-sm md:text-base mt-4 "}>آیا از پاک کردن اطمینان
+                        <DialogTitle className={"text-right text-sm mt-4 md:text-base"}>آیا از پاک کردن اطمینان
                             دارید؟</DialogTitle>
 
                     </DialogHeader>
@@ -72,11 +72,10 @@ export default function DeactivateDialog({id}: { id: number }) {
                             <Button variant="outline">خیر</Button>
                         </DialogClose>
                         <DialogClose asChild>
-                            <Button onClick={handleDeactive} type="submit">بله</Button>
+                            <Button onClick={handleDelete} type="submit">بله</Button>
                         </DialogClose>
                     </DialogFooter>
                 </DialogContent>
-
         </Dialog>
     )
 }

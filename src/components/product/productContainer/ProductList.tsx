@@ -1,15 +1,14 @@
 import {useState, lazy, Suspense} from "react";
 import {useLocation} from "react-router-dom";
-import FilterProductButton from "@/components/product/productFilterButton/FilterProductButton.tsx";
+import FilterProductButton from "@/components/product/productButtons/FilterProductButton.tsx";
 import {keepPreviousData, useQuery} from '@tanstack/react-query'
 import {fetchAllProducts} from "@/api/productApi/ProductService.ts";
 import ProductFilterSkeleton from "@/components/skeletons/ProductFilterSkeleton.tsx";
 import type {dataType} from "@/types/productQuery.ts";
-import PageAndTotalNumber from "@/components/product/productFilterButton/PageAndTotalNumber.tsx";
+import PageAndTotalNumber from "@/components/product/productButtons/PageAndTotalNumber.tsx";
 import ProductItem from "@/components/product/productContainer/ProductItem.tsx";
 import ProductListSkeleton from "@/components/skeletons/ProductListSkeleton.tsx";
-import AddNewProductButton from "@/components/product/productFilterButton/AddNewProductButton.tsx";
-
+import AddProductButton from "@/components/product/productButtons/AddProductButton.tsx";
 const ProductFilter = lazy(() => import("../ProductFilter.tsx"));
 import PaginationComponent from "@/components/pagination/PaginationComponent.tsx";
 
@@ -37,7 +36,7 @@ export default function ProductList() {
             <div
                 className={"flex px-3 border-b-2 bg-white justify-between gap-x-3 items-center cursor-pointer py-3 rounded-md"}>
                 <div className={"flex flex-col-reverse md:flex-row gap-y-3 items-center gap-x-3"}>
-                    <AddNewProductButton/>
+                    <AddProductButton/>
                     <FilterProductButton setOpen={setOpen}></FilterProductButton>
                 </div>
                 {data && <PageAndTotalNumber

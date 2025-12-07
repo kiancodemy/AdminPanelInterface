@@ -2,8 +2,8 @@ import type {ProductDto} from "@/types/productQuery.ts";
 import {Link} from "react-router";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-import DeactivateDialog from "@/components/dialog/DeactivateDialog.tsx";
-import DeleteDialog from "@/components/dialog/DeleteDialog.tsx";
+import DeactivateButton from "@/components/product/productButtons/DeactivateButton.tsx";
+import DeleteButton from "@/components/product/productButtons/DeleteButton.tsx";
 
 export default function ProductItem({item}: { item: ProductDto }) {
 
@@ -44,8 +44,8 @@ export default function ProductItem({item}: { item: ProductDto }) {
                     </Link>
 
 
-                    <DeactivateDialog id={item.id}></DeactivateDialog>
-                    <DeleteDialog id={item.id}></DeleteDialog>
+                    <DeactivateButton id={item.id}></DeactivateButton>
+                    <DeleteButton id={item.id}></DeleteButton>
                 </div>
 
 
