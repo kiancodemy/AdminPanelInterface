@@ -1,6 +1,5 @@
 
 import axios from "axios";
-import type {AddProductRequest} from "@/types/newProduct.ts";
 import {PRODUCT_URLS} from "@/api/productApi/ProductApiUrls.ts";
 export const deactivateByIdFn = async (query: number) => {
     const {data}=await axios.delete(`${PRODUCT_URLS.deactivateById}${query}`);
@@ -12,11 +11,4 @@ export const deleteByIdFn = async (query: number) => {
     return data;
 
 };
-export const addNewFn = async (query: AddProductRequest) => {
-    const {data}=await axios.post(PRODUCT_URLS.addNewProduct,query);
-    return data;
-
-};
-
-
 

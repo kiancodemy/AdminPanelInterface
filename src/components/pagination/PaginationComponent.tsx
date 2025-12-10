@@ -6,7 +6,7 @@ export default function PaginationComponent({PageInfo}: { PageInfo: PageInfoType
 
     // Invoke when user click to request another page.
     const [, setSearchParams] = useSearchParams();
-    const handlePageClick = (even:any) => {
+    const handlePageClick = (even:never) => {
 
         setSearchParams(prev => ({...prev,"page":even.selected}));
 

@@ -4,5 +4,6 @@ export const PRODUCT_URLS = {
     findAllProducts: `${BASE_URL}/api/v1/product/allProduct`,
     deactivateById: `${BASE_URL}/api/admin/product/deactivateProduct/`,
     deleteById: `${BASE_URL}/api/admin/product/deleteProduct/`,
+    addNewProduct: `${BASE_URL}/api/admin/product/createProduct`,
 };
 

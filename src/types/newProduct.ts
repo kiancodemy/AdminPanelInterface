@@ -1,8 +1,8 @@
 export type AddProductRequest = {
-    name: string
+    name: string | null;
     description: string | null
     price: number
     stock: number
     isActive: boolean
-    categoryId: number
+    categoryId: number | null
 }
