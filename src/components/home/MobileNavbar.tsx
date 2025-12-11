@@ -25,7 +25,7 @@ export default function MobileNavbar() {
 
 
     return (
-        <div className={"py-6 px-3 md:hidden"}>
+        <div className={"py-6 px-3 relative z-[1000] md:hidden"}>
             <p onClick={() => {
                 setOpen(true);
             }}>

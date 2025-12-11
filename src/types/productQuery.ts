@@ -54,3 +54,11 @@ export interface PageInfoType {
     totalPages: number;
     size: number
 }
+
+export interface SearchContainerProps {
+
+    isError: boolean;
+    error: unknown;        // or Error if you prefer
+    isLoading: boolean;
+    data?: dataType;
+}

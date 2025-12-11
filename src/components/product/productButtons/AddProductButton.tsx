@@ -34,7 +34,25 @@ export default function AddProductButton() {
     const [open, setOpen] = useState(false);
     const queryClient = useQueryClient();
     const location = useLocation();
-    // get all categories
+
+    // redact  hook form config //
+    const {
+        control,
+        register,
+        handleSubmit,
+        formState: {errors},
+        reset
+    } = useForm<AddProductRequest>({
+        defaultValues: {
+            name: null,
+            description: null,
+            price: 0,
+            stock: 0,
+            isActive: true,
+            categoryId: null
+        }
+    })
+    // get all categories fucntion (react query)
     const {data, refetch, isError} = useQuery({
             queryKey: ["categories"],
             queryFn: () => fetchAllCategories(),
@@ -43,6 +61,8 @@ export default function AddProductButton() {
             enabled: false
         }
     );
+
+    /// add new product mutation (react query)
     const mutation = useMutation({
 
         mutationFn: (query: AddProductRequest) => addNewFn(query),
@@ -71,23 +91,8 @@ export default function AddProductButton() {
     });
 
 
-    const {
-        control,
-        register,
-        handleSubmit,
-        formState: {errors},
-        reset
-    } = useForm<AddProductRequest>({
-        defaultValues: {
-            name: null,
-            description: null,
-            price: 0,
-            stock: 0,
-            isActive: true,
-            categoryId: null
-        }
-    })
 
+    /// add new product button ////
     const onSubmit = (data: AddProductRequest) => {
         mutation.mutate(data)
     }
