@@ -58,7 +58,7 @@ export interface PageInfoType {
 export interface SearchContainerProps {
 
     isError: boolean;
-    error: unknown;        // or Error if you prefer
+    error: unknown;      
     isLoading: boolean;
     data?: dataType;
 }

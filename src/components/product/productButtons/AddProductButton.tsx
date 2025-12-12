@@ -58,7 +58,6 @@ export default function AddProductButton() {
             queryFn: () => fetchAllCategories(),
             retry: false,
             staleTime: 120 * 60 * 1000,
-            enabled: false
         }
     );
 

@@ -31,7 +31,7 @@ export default function ProductList() {
     });
 
     return (
-        <div className={"max-w-full overflow-y-scroll container flex flex-col gap-y-4 mx-auto bg-gray-50 p-2  md:p-5"}>
+        <div className={"max-w-full overflow-y-auto container flex flex-col gap-y-4 mx-auto bg-gray-50 p-2  md:p-5"}>
             {/* filter header */}
             <div
                 className={"flex px-3 border-b-2 bg-white justify-between gap-x-3 items-center cursor-pointer py-3 rounded-md"}>

@@ -18,6 +18,7 @@ export default function SearchInput() {
     useEffect(() => {
         const timer = setTimeout(() => {
             if (search) {
+                console.log("search", search);
                 refetch();
             }
 
@@ -29,7 +30,7 @@ export default function SearchInput() {
     return (
         <div>
             <div className={"relative flex flex-col"}>
-                <input value={search?search:undefined} onChange={(e)=>setSearch(`?search=${e.target.value}`)} onClick={() => setOpen(true)}
+                <input  onChange={(e)=>setSearch(`?search=${e.target.value}`)} onClick={() => setOpen(true)}
                        className={"w-[280px]  bg-white z-[100] placeholder:text-sm border-2 rounded-md border-gray-200 py-1 px-1 md:px-4 focus:outline-blue-500"}
                        type="text" placeholder={"جستجوی محصول"}/>
                 {open&&<SearchContainer isError={isError} error={error}  isLoading={isLoading} data={data}></SearchContainer>}
