@@ -14,7 +14,7 @@ import type {ProductDto, dataType} from "@/types/productQuery.ts";
 import {toastHandler} from "@/service/ToastHandler.ts";
 
 import {useLocation} from "react-router-dom";
-export default function DeleteButton({id}: { id: number }) {
+export default function DeleteProductButton({id}: { id: number }) {
     const queryClient = useQueryClient();
     const location=useLocation();
     const mutation = useMutation({

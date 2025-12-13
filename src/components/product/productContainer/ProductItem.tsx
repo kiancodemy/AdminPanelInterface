@@ -3,7 +3,7 @@ import {Link} from "react-router";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import DeactivateButton from "@/components/product/productButtons/DeactivateButton.tsx";
-import DeleteButton from "@/components/product/productButtons/DeleteButton.tsx";
+import DeleteProductButton from "@/components/product/productButtons/DeleteProductButton.tsx";
 
 export default function ProductItem({item}: { item: ProductDto }) {
 
@@ -45,7 +45,7 @@ export default function ProductItem({item}: { item: ProductDto }) {
 
 
                     <DeactivateButton id={item.id}></DeactivateButton>
-                    <DeleteButton id={item.id}></DeleteButton>
+                    <DeleteProductButton id={item.id}></DeleteProductButton>
                 </div>
 
 

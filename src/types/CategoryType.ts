@@ -6,4 +6,5 @@ export interface CategoryType {
 export interface Category {
     id: number,
     name: string,
+    productCount:number
 }
